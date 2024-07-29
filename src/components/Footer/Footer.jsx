@@ -52,14 +52,14 @@ const Footer = () => {
           <span className="text">Contact Us</span>
         </div>
       </div>
-      <div className="bottom-bar">
+      {/* <div className="bottom-bar">
         <div className="bottom-bar-content">
             <div className="text">
                 CLOTHING STORE CREATED BY HJ TANDEL , PREMIUM E-COMMERCE SOLOTIONS
             </div>
              <img src={Payment} alt="" />
         </div>
-      </div>
+      </div> */}
     </footer>
   );
 };

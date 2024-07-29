@@ -39,7 +39,8 @@
 }
 
 .text{
-    color: #3c009d;
+    // color: #3c009d;
+    color: red;
     font-size: 48px;
     font-weight: 700;   
 }
@@ -109,8 +110,7 @@
 }
 
 .submit{
-    // background:#4c00b4;
-    background:red;
+    background:#4c00b4;
     display: flex;
     justify-content: center;
     align-items: center;

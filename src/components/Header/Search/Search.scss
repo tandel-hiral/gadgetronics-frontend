@@ -10,7 +10,8 @@
     transform: translateY(100%);
     animation: slideSearchWindow 0.5s ease forwards;
     .form-field{
-        width: 100%;
+        // width: 100%;
+        width : 100vw;
         display: flex;
         justify-content: center;
         padding: 10px 50px;

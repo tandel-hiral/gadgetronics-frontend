@@ -26,7 +26,6 @@ const Search = ({setShowSearch}) => {
         <div className="form-field">
             <input
              type="text"
-             autoFocus
              placeholder="Search for Products"
              value={query} 
              onChange={onChange}

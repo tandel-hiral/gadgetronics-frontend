@@ -3,7 +3,7 @@
 .mainContainer{
     background: linear-gradient(#2A00B7 , #42006C);
     // height: 100vh;
-    height: calc(100vh - 50px);
+    height: calc(100vh - 100px);
     @include md{
     height: calc(100vh - 80px);
 

@@ -85,10 +85,9 @@ const signUp = async() =>{
     }
   } catch (error) {
     console.log({error})
-    toast.error('invalid inputsss')
-    // toast.error(error.message , {
-    //     hideProgressBar : true,
-    // }) ;
+    toast.error(error.message , {
+        hideProgressBar : true,
+    }) ;
   }
 };
 

@@ -44,7 +44,8 @@ const initialUserr = {password:"" , email:"" , username:""}
 };
 
 const handleLogin = async()=>{
-  const url =`http://localhost:1337/api/auth/local`;
+  // const url =`http://localhost:1337/api/auth/local`;
+  const url =`${process.env.REACT_APP_BASE_URL}/api/auth/local`;
   try {
       if (user.identifier && user.password){
           const {data} = await axios.post(url, user) ; //here "data" and "identifier" are variable  we cant change the name of variable here
@@ -71,7 +72,8 @@ const handleLogin = async()=>{
 
 const signUp = async() =>{
   try {
-    const url =`http://localhost:1337/api/auth/local/register`;
+    // const url =`http://localhost:1337/api/auth/local/register`;
+    const url =`${process.env.REACT_APP_BASE_URL}/api/auth/local/register`;
     if(userr.username && userr.email && userr.password){
       const res = await axios.post(url , userr);
       if(res){

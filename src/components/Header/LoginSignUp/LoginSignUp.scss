@@ -1,7 +1,7 @@
 @import "../../../css-config/mixins.scss";
 
 .mainContainer{
-    // background: linear-gradient(#2A00B7 , #42006C);
+    background: linear-gradient(#2A00B7 , #42006C);
     // height: 100vh;
     height: calc(100vh - 50px);
     @include md{

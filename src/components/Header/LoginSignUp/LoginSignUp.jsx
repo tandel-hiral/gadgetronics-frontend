@@ -13,28 +13,28 @@ import { storeUser } from '../../../utils/userData';
 
 function LoginSignUp() {
 
-  const initialUser = {password:"" , identifier:""}
-const initialUserr = {password:"" , email:"" , username:""}
+  const initialLoginUser = {password:"" , identifier:""}
+const initialsignUpUser = {password:"" , email:"" , username:""}
 
 
   const navigate = useNavigate();
 
-  const [user , setUser] = useState(initialUser)
-  const [userr , setUserr] = useState(initialUserr)
+  const [loginUser , setLoginUser] = useState(initialLoginUser)
+  const [signUpUser , setSignUpUser] = useState(initialsignUpUser)
 
   const [action , setAction] = useState("Login");
 
   const handleChange = ({target}) =>{
     const {name , value} = target
     if(action=="Login"){
-      setUser((currentUser)=>({
+      setLoginUser((currentUser)=>({
         ...currentUser,
         // [target.name] : target.value;
         [name] : value
     }));
     }
     else{
-      setUserr((currentUser)=>({
+      setSignUpUser((currentUser)=>({
         ...currentUser,
         // [target.name] : target.value;
         [name] : value
@@ -47,8 +47,8 @@ const handleLogin = async()=>{
   // const url =`http://localhost:1337/api/auth/local`;
   const url =`${process.env.REACT_APP_BASE_URL}/api/auth/local`;
   try {
-      if (user.identifier && user.password){
-          const {data} = await axios.post(url, user) ; //here "data" and "identifier" are variable  we cant change the name of variable here
+      if (loginUser.identifier && loginUser.password){
+          const {data} = await axios.post(url, loginUser) ; //here "data" and "identifier" are variable  we cant change the name of variable here
         //  console.log({data});
          
          if (data.jwt) {
@@ -56,7 +56,7 @@ const handleLogin = async()=>{
           toast.success('Logged in successfully',{
               hideProgressBar : true,
           });
-          setUser(initialUser);
+          setLoginUser(initialLoginUser);
           window.location.reload();
           navigate('/')
          }
@@ -74,10 +74,10 @@ const signUp = async() =>{
   try {
     // const url =`http://localhost:1337/api/auth/local/register`;
     const url =`${process.env.REACT_APP_BASE_URL}/api/auth/local/register`;
-    if(userr.username && userr.email && userr.password){
-      const res = await axios.post(url , userr);
+    if(signUpUser.username && signUpUser.email && signUpUser.password){
+      const res = await axios.post(url , signUpUser);
       if(res){
-        setUserr(initialUserr);
+        setSignUpUser(initialsignUpUser);
         toast.success('registered successfully',{
           hideProgressBar : true,
       });
@@ -108,18 +108,18 @@ const signUp = async() =>{
         {action==="Login"?<div></div>:<div className="input">
           <IoPersonSharp/>
           <input type="text" placeholder='Name' name="username" 
-                value={userr.username} onChange={handleChange}/>
+                value={signUpUser.username} onChange={handleChange}/>
         </div>}
         
         <div className="input">
         <SiGmail/>
           <input type="email" placeholder='Email Id' name={action==="Login"?"identifier":"email"}
-                value={action==="Login"? user.identifier :userr.email } onChange={handleChange}/>
+                value={action==="Login"? loginUser.identifier :signUpUser.email } onChange={handleChange}/>
         </div>
         <div className="input">
         <IoMdLock/>
           <input type="password" placeholder='Password' name="password"  
-                 value={action==="Login"? user.password :userr.password } onChange={handleChange}/>
+                 value={action==="Login"? loginUser.password :signUpUser.password } onChange={handleChange}/>
         </div>
       </div>
       {action=="Sign Up"?<div></div>:<div className="forgot-password">Forgot Password? <span>Click Here!</span></div>}

@@ -1,11 +1,18 @@
 @import "../../../css-config/mixins.scss";
 
 .mainContainer{
-    background: linear-gradient(#2A00B7 , #42006C);
-    height: 100vh;
+    // background: linear-gradient(#2A00B7 , #42006C);
+    // height: 100vh;
+    height: calc(100vh - 50px);
+    @include md{
+    height: calc(100vh - 80px);
+
+    }
+
     display: flex;
     justify-content: center;
     // align-items: center;
+
     
 
 
@@ -15,7 +22,7 @@
     // margin: auto;  //it will set horizontally center 
     @include md{
     
-        margin-top: 60px;
+        margin-top: 20px;
  
     }
     margin-top: 80px;
@@ -26,6 +33,7 @@
     }
     background: #fff;
     height: fit-content;
+    border: #4c00b4 2px solid;
 }
 
 .header{

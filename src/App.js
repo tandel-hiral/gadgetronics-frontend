@@ -24,6 +24,7 @@ function App() {
           <Route path="/product/:id" element={<SingleProduct />} />
           <Route path="/login/" element={<LoginSignUp/>} />
         </Routes>
+        
         <Footer />
       </AppContext>
       <ToastContainer/>

@@ -7,23 +7,48 @@ import { useContext, useEffect } from "react";
 import { Context } from "../../utils/context";
 import { userData } from "../../utils/userData";
 import { useNavigate } from "react-router-dom";
+import {loadStripe} from "@stripe/stripe-js"
+import { makePaymentRequest } from "../../utils/api";
 
 const Cart = ({ setShowCart }) => {
 
   const navigate = useNavigate()
   const {cartItems,cartSubTotal} = useContext(Context);
 
-  function HandleCheckout(){
-    setShowCart(false);
-    const {jwt} = userData();
+  const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
+  const handlePayment =async()=>{
+      setShowCart(false);
+      const {jwt} = userData();
     
       if(!jwt){
         navigate('/login');
       }
-      
-     
-  }
+      else{
+    try {
+      const stripe = await stripePromise;
+      const res = await makePaymentRequest.post("/api/orders" , {
+        products : cartItems
+      }) ;
+  
+      await stripe.redirectToCheckout({
+        sessionId: res.data.stripeSession.id
+      });
+  
+    } catch (error) {
+      console.log(error)
+    } 
+  } 
+    };
+
+  // function HandleCheckout(){
+  //   setShowCart(false);
+  //   const {jwt} = userData();
+    
+  //     if(!jwt){
+  //       navigate('/login');
+  //     }     
+  // }
 
   return (
     <div className="cart-panel">
@@ -54,7 +79,8 @@ const Cart = ({ setShowCart }) => {
                 <span className="text total">&#8377;{cartSubTotal}</span>
                 </div> 
                 <div className="button">
-                  <button className="checkout-cta" onClick={HandleCheckout}>Checkout</button>
+                  {/* <button className="checkout-cta" onClick={HandleCheckout}>Checkout</button> */}
+                  <button className="checkout-cta" onClick={handlePayment}>Checkout</button>
                   </div> 
             </div>
         </>}

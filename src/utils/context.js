@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import App from "../App";
 import { useLocation } from "react-router-dom";
+import {toast} from "react-toastify"
 
 export const Context = createContext();
 
@@ -33,7 +34,10 @@ const AppContext = ({ children }) => {
     let index = items.findIndex((p) => p.id === product.id);
     if (index !== -1) {
       //product already exist in cart then add quantity to quntity key
-      items[index].attributes.quantity += quantity;
+      // items[index].attributes.quantity += quantity;
+      toast.success('item already in cart',{
+        hideProgressBar : true,
+    });
     } else {
       //if not exist in cart then add new    untity key and add it
       product.attributes.quantity = quantity;

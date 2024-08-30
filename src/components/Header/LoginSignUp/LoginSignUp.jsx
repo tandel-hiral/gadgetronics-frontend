@@ -57,7 +57,7 @@ const handleLogin = async()=>{
               hideProgressBar : true,
           });
           setLoginUser(initialLoginUser);
-          window.location.reload();
+          // window.location.reload();
           navigate('/')
          }
       }

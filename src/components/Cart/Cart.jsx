@@ -1,6 +1,8 @@
 import { MdClose } from "react-icons/md";
 import { BsCartX } from "react-icons/bs";
 import CartItem from "./CartItem/CartItem";
+import { SpinnerCircular } from 'spinners-react';
+import  {useState } from "react";
 
 import "./Cart.scss";
 import { useContext, useEffect } from "react";
@@ -14,18 +16,22 @@ const Cart = ({ setShowCart }) => {
 
   const navigate = useNavigate()
   const {cartItems,cartSubTotal} = useContext(Context);
+  const [loading, setLoading] = useState(false);
 
   const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
   const handlePayment =async()=>{
-      setShowCart(false);
+   
+      
       const {jwt} = userData();
     
       if(!jwt){
+        setShowCart(false);
         navigate('/login');
       }
       else{
     try {
+      setLoading(true);
       const stripe = await stripePromise;
       const res = await makePaymentRequest.post("/api/orders" , {
         products : cartItems
@@ -80,7 +86,9 @@ const Cart = ({ setShowCart }) => {
                 </div> 
                 <div className="button">
                   {/* <button className="checkout-cta" onClick={HandleCheckout}>Checkout</button> */}
-                  <button className="checkout-cta" onClick={handlePayment}>Checkout</button>
+                  <button className="checkout-cta" onClick={handlePayment}>Checkout
+                  {loading && <SpinnerCircular size={30} thickness={71} speed={65} color="rgba(255, 255, 255, 1)" secondaryColor="rgba(142, 45, 226, 1)" />}
+                  </button>
                   </div> 
             </div>
         </>}
